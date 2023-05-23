@@ -1,11 +1,9 @@
-// gcc echoserveri.c echo.c csapp.c -o echoserveri -lpthread -lrt
+// gcc echoserveri.c echo.c csapp.c -o echoserveri -pthread
 // ./echoserveri 20420
 
 #include "csapp.h"
 
 void echo(int connfd);
-
-void echo (int connfd);
 
 int main(int argc, char **argv){
     int listenfd, connfd;

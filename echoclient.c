@@ -24,7 +24,6 @@ int main(int argc, char **argv){
         Rio_writen(clientfd, buf, strlen(buf)); // 7. 입력 값을 서버 전달
         Rio_readlineb(&rio, buf, MAXLINE);      // 9. 서버에서 보내준 값 읽기
         Fputs(buf, stdout);                     // 10. 읽은 값을 터미널에 보여주기
-
     }
     Close(clientfd);
     exit(0);
