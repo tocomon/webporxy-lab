@@ -174,11 +174,12 @@ void serve_static(int fd, char *filename, int filesize)
     Rio_writen(fd, buf, strlen(buf));    //line:netp:servestatic:endserve
 
     /* Send response body to client */
-    srcfd = Open(filename, O_RDONLY, 0); //line:netp:servestatic:open
-    srcp = Mmap(0, filesize, PROT_READ, MAP_PRIVATE, srcfd, 0); //line:netp:servestatic:mmap
-    Close(srcfd);                       //line:netp:servestatic:close
-    Rio_writen(fd, srcp, filesize);     //line:netp:servestatic:write
-    Munmap(srcp, filesize);             //line:netp:servestatic:munmap
+    srcfd = Open(filename, O_RDONLY, 0);
+    srcp = (char *)malloc(sizeof(filesize));
+    Rio_readn(srcfd, srcp, filesize);
+    Close(srcfd);
+    Rio_writen(fd, srcp, filesize);
+    free(srcp);
 }
 
 /*
@@ -188,6 +189,8 @@ void get_filetype(char *filename, char *filetype)
 {
     if (strstr(filename, ".html"))
 	strcpy(filetype, "text/html");
+    else if (strstr(filename, ".mp4"))
+  strcpy(filetype, "video/mp4");
     else if (strstr(filename, ".gif"))
 	strcpy(filetype, "image/gif");
     else if (strstr(filename, ".png"))
