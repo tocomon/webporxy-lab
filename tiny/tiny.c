@@ -25,6 +25,18 @@ void serve_dynamic(int fd, char *filename, char *cgiargs);
 void clienterror(int fd, char *cause, char *errnum, 
 		 char *shortmsg, char *longmsg);
 
+/*
+Rio_readinitb(rio_t *rp, int fd): 파일 식별자와 읽기 버퍼 연결
+Rio_readlineb(): 입력 스트림에서 한 줄의 문자열을 읽어오는 함수.
+fprintf(FILE *stream, const char *foramt, ...): formatted output을 stream에 쓰기 위해 사용됨
+exit(status): status - 프로그램의 종료 상태를 나타내는 int형의 값
+accept(): 듣기 식별자를 받음, 처리가 끝날 때 까지 대기(시스템 콜 사용),
+듣기 식별자는 서버 살아있는 동안 계속 존재, accept는 연결 식별자를 리턴, 클라이언트-서버 사이의 연결 끝점
+서버가 연결 요청을 수락시마다 생성, 서버가 클라이언트에 서비스하는 동안에만 존재
+getnameinfo(): 호스트이름, 호스트주소, 서비스이름, 포트번호의 스트링 표시를 소켓 주소 구조체로 변환
+getaddressinfo(): getaddrinfo와 반대
+*/
+
 int main(int argc, char **argv) 
 {
     int listenfd, connfd;
